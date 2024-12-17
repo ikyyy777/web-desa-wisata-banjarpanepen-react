@@ -53,7 +53,6 @@ if (!isProduction) {
   app.use(compression())
   app.use(base, sirv('./dist/client', { extensions: [] }))
 }
-
 // Serve HTML
 // "*home" is Express 5.x syntax for matching all routes
 app.use('*all', async (req, res) => {
@@ -90,3 +89,5 @@ app.use('*all', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`)
 })
+
+export default app;
