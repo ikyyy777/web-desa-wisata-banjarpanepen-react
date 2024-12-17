@@ -21,7 +21,7 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
   return isAuthenticated ? children : <Navigate to="/admin/login" />
 }
 
-export const Router = () => {
+export const Index = () => {
   return (
     <div className="min-h-screen bg-[#121212] text-white">
       <Toaster 

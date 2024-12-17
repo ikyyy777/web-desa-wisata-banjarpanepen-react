@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server' // Server-side rendering module fr
 import { StaticRouter } from 'react-router-dom/server'
 
 // App level imports
-import { Router } from './router'
+import { Index } from './router'
 import Error, { ErrorProps } from './components/Error'
 
 /**
@@ -25,7 +25,7 @@ export function render({ path, statusCode }: IRenderProps) {
     // The renderToString method, is used to convert React components to an HTML string, which can be sent to the client for initial rendering.
     <React.StrictMode>
       <StaticRouter location={path}>
-        <Router />
+        <Index />
       </StaticRouter>
     </React.StrictMode>
   )
