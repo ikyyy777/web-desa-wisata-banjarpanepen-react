@@ -53,9 +53,9 @@ if (!isProduction) {
   app.use(compression())
   app.use(base, sirv('./dist/client', { extensions: [] }))
 }
+
 // Serve HTML
-// "*home" is Express 5.x syntax for matching all routes
-app.use('*all', async (req, res) => {
+app.use('*', async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, '')
 
@@ -68,14 +68,15 @@ app.use('*all', async (req, res) => {
       render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render
     } else {
       template = templateHtml
-      render = (await import('./dist/server/entry-server.js')).render
+      // Fix the import path for production
+      const { render: ssrRender } = await import('./dist/server/entry-server.js')
+      render = ssrRender
     }
 
-    const rendered = await render(url, ssrManifest)
-
+    const rendered = await render({ path: url, statusCode: url === '/404' ? 404 : undefined })
     const html = template
-      .replace(`<!--app-head-->`, rendered.head ?? '')
-      .replace(`<!--app-html-->`, rendered.html ?? '')
+      .replace(`<!--app-head-->`, rendered.head || '')
+      .replace(`<!--app-html-->`, rendered.html || '')
 
     res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
   } catch (e) {
