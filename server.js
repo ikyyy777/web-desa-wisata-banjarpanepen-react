@@ -29,7 +29,7 @@ if (!isProduction) {
   const { createServer } = await import('vite')
   vite = await createServer({
     server: { middlewareMode: true },
-    appType: 'custom', 
+    appType: 'custom',
     base,
   })
   app.use(vite.middlewares)
@@ -55,7 +55,7 @@ if (!isProduction) {
 }
 
 // Serve HTML
-// "*home" is Express 5.x syntax for matching all routes  
+// "*home" is Express 5.x syntax for matching all routes
 app.use('*all', async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, '')
