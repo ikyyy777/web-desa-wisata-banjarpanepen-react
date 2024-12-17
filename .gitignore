@@ -23,7 +23,6 @@ dist-ssr
 *.sw?
 
 # Environment variables
-.env
 
 # Sensitive files
 public/api/
