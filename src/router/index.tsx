@@ -1,8 +1,6 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
-import { Toaster } from 'react-hot-toast'
-import Navbar from '../components/layout/Navbar'
 import Footer from '../components/Footer'
 
 // Pages
@@ -23,42 +21,20 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
 
 export const Router = () => {
   return (
-    <div className="min-h-screen bg-[#121212] text-white">
-      <Toaster 
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: '#333',
-            color: '#fff',
-          },
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 4000,
-          },
-        }}
-      />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/wisata" element={<Wisata />} />
-        <Route path="/agenda" element={<Agenda />} />
-        <Route path="/galeri" element={<Galeri />} />
-        <Route path="/hubungi-kami" element={<HubungiKami />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route 
-          path="/admin/*" 
-          element={
-            <PrivateRoute>
-              <AdminDashboard />
-            </PrivateRoute>
-          } 
-        />
-        <Route path="/wisata/:slug" element={<WisataArtikel />} />
-        <Route path="*" element={<Error statusCode={404} />} />
-      </Routes>
-      <Footer />
-    </div>
+      <><Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/wisata" element={<Wisata />} />
+      <Route path="/agenda" element={<Agenda />} />
+      <Route path="/galeri" element={<Galeri />} />
+      <Route path="/hubungi-kami" element={<HubungiKami />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route
+        path="/admin/*"
+        element={<PrivateRoute>
+          <AdminDashboard />
+        </PrivateRoute>} />
+      <Route path="/wisata/:slug" element={<WisataArtikel />} />
+      <Route path="*" element={<Error statusCode={404} />} />
+    </Routes><Footer /></>
   )
 }
