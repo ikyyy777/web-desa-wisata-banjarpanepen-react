@@ -3,7 +3,6 @@ import express from 'express'
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production'
-const port = process.env.PORT || 5173
 const base = process.env.BASE || '/'
 
 // Cached production assets
@@ -12,7 +11,7 @@ const templateHtml = isProduction
   : ''
 
 // Create http server
-const app = express()
+export const app = express()
 
 // Add Vite or respective production middlewares
 /** @type {import('vite').ViteDevServer | undefined} */
@@ -63,9 +62,4 @@ app.use('*all', async (req, res) => {
     console.log(e.stack)
     res.status(500).end(e.stack)
   }
-})
-
-// Start http server
-app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`)
 })
